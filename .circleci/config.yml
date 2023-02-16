@@ -1,0 +1,21 @@
+version: 2.1
+
+jobs:
+  build-arm:
+    parameters:
+      image:
+        default: "cimg/android:2023.02"
+        type: string
+    docker:
+      image: << parameters.image >>
+    steps:
+      - checkout
+      - run: ruby -v
+
+workflows:
+  workflow1:
+    jobs:
+      - build-arm:
+          matrix:
+            parameters:
+              image: ["cimg/android:2023.02", "cimg/android:2022.12"]
